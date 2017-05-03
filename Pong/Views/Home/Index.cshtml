@@ -1,0 +1,22 @@
+﻿@using Pong.Helper
+@{
+    ViewBag.Title = "Home Page";
+}
+<script src="@Url.Script("~/Scripts/Home.js")" type="text/javascript"></script>
+
+<div class="container">
+    <div class="row">
+        <canvas id="canvas">
+            Este texto se muestra si su navegador no soporta el lienzo (canvas) de HTML5.
+        </canvas>
+    </div>
+    <div class="row" data-bind="with: Partida">
+        <button class="btn btn-default" data-bind="click: JugadorLocal.Subir">subir</button>
+        <button class="btn btn-default" data-bind="click: JugadorLocal.Bajar">bajar</button>
+    </div>
+    <div class="row">
+        <button class="btn btn-default" data-bind="click: BuscarPartida">buscar</button>
+    </div>
+</div>
+
+
