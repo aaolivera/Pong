@@ -15,5 +15,10 @@ namespace Pong.Models
         {
             return Jugadores.Count == 2;
         }
+
+        public bool Ready()
+        {
+            return Jugadores.Count(x => x.Ready) == 2;
+        }
     }
 }

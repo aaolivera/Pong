@@ -24,11 +24,12 @@ namespace Pong.Hubs
             Clients.OthersInGroup(partidaExistente.Id).informarMovimiento(arriba);
         }
         
-        public void UnirseAPartida(string jugadorId)
+        public int UnirseAPartida(string jugadorId)
         {
+            var esVicitante = -1;
             if (Partidas.Any(x => x.Jugadores.Any(y => y.Id == jugadorId)))
             {
-                return;
+                return 1;
             }
             var jugador = Jugadores.FirstOrDefault(x => x.Id == jugadorId) ?? new Jugador { Id = jugadorId };
 
@@ -38,11 +39,12 @@ namespace Pong.Hubs
             {
                 ultima = new Partida();
                 Partidas.Add(ultima);
+                esVicitante = 1;
             }
 
             ultima.Jugadores.Add(jugador);
-            
             Groups.Add(Context.ConnectionId, ultima.Id);
+            return esVicitante;
         }
 
         public void Ready(string jugadorId)
@@ -58,7 +60,12 @@ namespace Pong.Hubs
 
             if (partidaExistente.Ready())
             {
-                Clients.Group(partidaExistente.Id).iniciarPartida();
+                var r = new Random();
+                Clients.Group(partidaExistente.Id).iniciarPunto(
+                new {
+                    velX = Math.Floor(r.NextDouble() * 2) == 0 ? -1 : 1,
+                    velY = Math.Floor(r.NextDouble() * 2) == 0 ? -1 : 1
+                });
             }
         }
     }
