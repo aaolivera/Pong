@@ -4,13 +4,13 @@
 }
 <script src="@Url.Script("~/Scripts/Home.js")" type="text/javascript"></script>
 
-<div class="container">
+<div class="container" data-bind="event: { keyup: subirBajarTeclado }">
     <div class="row">
         <canvas id="canvas">
             Este texto se muestra si su navegador no soporta el lienzo (canvas) de HTML5.
         </canvas>
     </div>
-    <div class="row" data-bind="with: Partida">
+    <div class="row" data-bind="with: Partida" >
         <button class="btn btn-default" data-bind="click: JugadorLocal.Subir">subir</button>
         <button class="btn btn-default" data-bind="click: JugadorLocal.Bajar">bajar</button>
     </div>
