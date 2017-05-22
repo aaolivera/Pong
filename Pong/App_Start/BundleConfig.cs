@@ -11,7 +11,7 @@ namespace Pong
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/knockout-3.4.2.js",
-                        "~/Scripts/jquery.signalR-2.2.1.min.js"
+                        "~/Scripts/jquery.signalR-2.2.2.min.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(

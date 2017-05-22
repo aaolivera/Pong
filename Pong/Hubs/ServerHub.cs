@@ -21,7 +21,7 @@ namespace Pong.Hubs
                 return;
             }
 
-            Clients.OthersInGroup(partidaExistente.Id).informarMovimiento(arriba);
+            Clients.OthersInGroup(partidaExistente.Id).recibirMovimiento(arriba);
         }
         
         public int UnirseAPartida(string jugadorId)
@@ -67,6 +67,16 @@ namespace Pong.Hubs
                     velY = Math.Floor(r.NextDouble() * 2) == 0 ? -1 : 1
                 });
             }
+        }
+
+        public void Ping(string timestamp)
+        {
+            Clients.AllExcept(Context.ConnectionId).responderPing(timestamp, Context.ConnectionId);
+        }
+
+        public void ResponderPing(string timestamp, string connectionId)
+        {
+            Clients.Client(connectionId).recibirPing(timestamp);
         }
     }
 }
